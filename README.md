@@ -63,11 +63,12 @@ Widget layout - What will display
 Need to learn more about [layouts](https://developer.android.com/guide/topics/ui/declaring-layout).
 Needs to be saved in `res/layout`
 
-
-
+From this [stackoverflow answer](https://stackoverflow.com/a/6265265/19961621) `AppWidgetProvider` calls Service
 
 ---
 ## Resources:
 [BroadCast Listener and XML Adding](https://github.com/Fector101/Laner/wiki/Dev#how-to-create-broadcast-listener-kivy)
 
 [android docs](https://developer.android.com/develop/ui/views/appwidgets)
+
+[StackoverFlow AppWidgetProvider call service](https://stackoverflow.com/a/6265265/19961621)
