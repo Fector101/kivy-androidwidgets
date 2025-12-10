@@ -54,9 +54,17 @@ meta-data:
 </receiver>
 ```
 
-AppWidgetProvider class:
+AppWidgetProvider class extends BroadcastReceiver class, i.e it's a child class:
 
 It receives only the event broadcasts when widget is updated, deleted, enabled, and disabled. 
+Use method `onUpdate` which is called in every `updatePeriodMillis`
+
+Widget layout - What will display
+Need to learn more about [layouts](https://developer.android.com/guide/topics/ui/declaring-layout).
+Needs to be saved in `res/layout`
+
+
+
 
 ---
 ## Resources:
