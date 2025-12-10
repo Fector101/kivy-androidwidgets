@@ -7,7 +7,11 @@ i think it only needs it's java class - broadcast listener, editing AndroidMainf
 
 Will release a version when or if it's successful 
 [testing](https://github.com/Fector101/wallpaper-carousel/tree/android-widget)
+
+
 ---
+
+
 ## Research 
 From AndroidMainfest point to `AppWidgetProviderInfo`
 The `AppWidgetProviderInfo` XML Will contain info about the widget, should be saved in `res/xml/`
