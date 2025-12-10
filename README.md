@@ -63,7 +63,7 @@ Widget layout - What will display
 Need to learn more about [layouts](https://developer.android.com/guide/topics/ui/declaring-layout).
 Needs to be saved in `res/layout`
 
-From this [stackoverflow answer](https://stackoverflow.com/a/6265265/19961621) `AppWidgetProvider` calls Service
+From this [stackoverflow answer](https://stackoverflow.com/a/6265265/19961621) `AppWidgetProvider` calls a Sticky Service
 
 ---
 ## Resources:
