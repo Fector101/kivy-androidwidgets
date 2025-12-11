@@ -1,5 +1,6 @@
-This repo contains how to create An Android Widget.
-Working Sample: [repo](https://github.com/Fector101/wallpaper-carousel)
+This repo contains how to create An Android Widget.  
+
+### Complete Sample: [working app](https://github.com/Fector101/wallpaper-carousel)
 
 step 1: First you Design How you want the Widget to Look [it's Layout].   
 Store it in: `res/layout/simple_widget.xml`
