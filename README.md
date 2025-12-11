@@ -28,7 +28,7 @@ step 2: Create an xml containing the info about the widget.
 Like: size, preview icon and others   
 path: `res/xml/widgetproviderinfo.xml`
 ```xml
-appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="120dp"
     android:minHeight="60dp"
     android:updatePeriodMillis="1800000"
