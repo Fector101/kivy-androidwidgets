@@ -1,4 +1,4 @@
-This is how to customise more stuff in widgets.
+How to customise widgets.
 ---
 Like: Title, description and curved corners
 ### Prerequisite
@@ -51,21 +51,22 @@ Complete file;
     android:description="@string/widget_simple_demo_description" >
 </appwidget-provider>
 ```
-Sample of proper widget with Title:
 
-Sample of Bad widget without Title and Description: 
+| **Sample of Good Widget with Title** | **Sample of Bad Widget without Title and Description** |
+|-------------------------------------|--------------------------------------------------------|
+| ![Good widget with title](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/has-title-or-desc.jpg) | ![Bad widget without title or description](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/no-title-or-desc.jpg) |
+
 
 ---
 
 ## How to make your widget background curved 
-This is simply using another layout as background 
+This is simply using a drawable as it's background 
 Create `res/drawable/widget_bg.xml`
 ```xml
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
     <solid android:color="#FFFFFF"/>
-
     <corners android:radius="16dp"/>
 
     <padding
@@ -75,7 +76,7 @@ Create `res/drawable/widget_bg.xml`
         android:bottom="10dp"/>
 </shape>
 ```
-Then in `res/layout/simple_widget.xml` point to widget as background.   
+Then in `res/layout/simple_widget.xml` point to the drawable.   
 Line: `android:background="@drawable/widget_bg"`
 Complete file:
 ```xml
@@ -96,3 +97,6 @@ Complete file:
 
 </LinearLayout>
 ```
+| **Sample of Widget with Rounded Corners** | **Sample of Widget with No Rounded Corners** |
+|------------------------------------------|----------------------------------------------|
+| ![Rounded corners widget](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/rounded1.jpg) | ![No rounded corners widget](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/not-rounded.jpg) |
