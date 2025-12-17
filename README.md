@@ -120,4 +120,4 @@ android.add_resources = res
 android.add_src = src
 p4a.hook = p4a/hook.py
 ```
-The basic-AndroidWidget.zip contains a working demo
+For more widget customisation check: [How to Customise.md](how-to-customise.md)
