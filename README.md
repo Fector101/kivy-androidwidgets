@@ -3,6 +3,9 @@ Kivy-androidwidgets
 This repo contains how to create An Android Widget.  
 Complete Sample: [working app](https://github.com/Fector101/wallpaper-carousel)
 
+5 Steps For a simple widget
+---
+
 step 1: First you Design How you want the Widget to Look [it's Layout].   
 Store it in: `res/layout/simple_widget.xml`
 This a simple widget with a text
@@ -120,4 +123,10 @@ android.add_resources = res
 android.add_src = src
 p4a.hook = p4a/hook.py
 ```
-For more widget customisation check: [How to Customise.md](how-to-customise.md)
+
+For More widget customisation check: [How to Customise.md](how-to-customise.md)
+---
+
+Sample Image:
+
+![Rounded corners widget](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/not-rounded.jpg)
