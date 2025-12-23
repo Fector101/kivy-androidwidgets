@@ -6,7 +6,7 @@ Complete Sample: [working app](https://github.com/Fector101/wallpaper-carousel)
 5 Steps For a simple widget
 ---
 
-step 1: First you Design How you want the Widget to Look [it's Layout].   
+## step 1: First you Design How you want the Widget to Look [it's Layout].   
 Store it in: `res/layout/simple_widget.xml`
 This a simple widget with a text
 ```xml
@@ -29,7 +29,7 @@ This a simple widget with a text
 
 </LinearLayout>
 ```
-step 2: Create an xml containing the info about the widget.  
+## step 2: Create an xml containing the info about the widget.  
 Like: size, preview icon and others   
 path: `res/xml/widgetproviderinfo.xml`
 ```xml
@@ -45,7 +45,7 @@ path: `res/xml/widgetproviderinfo.xml`
 ```
 Create preview image png in right path`res/drawable/ic_launcher_foreground.png`
 
-step 3: Create a `AppWidgetProvider` it's used to receive events for widget.   
+## step 3: Create a `AppWidgetProvider` it's used to receive events for widget.   
 path: `src/SimpleWidget.java`.  
 This will receive an event when widget is add to change it's text
 
@@ -78,7 +78,8 @@ public class SimpleWidget extends AppWidgetProvider {
     }
 }
 ```
-Step 4: Automate injecting Receiver in XML
+
+## Step 4: Automate injecting Receiver in XML
 
 path:`p4a/hook.py`
 
@@ -117,16 +118,19 @@ def after_apk_build(toolchain: ToolchainCL):
     print("Successfully_101: Manifest update completed successfully!")
 
 ```
-Step 5: From `buildozer.spec` tell it you want to add resources, src and p4a hook
+
+## Step 5: From `buildozer.spec` tell it you want to add resources, src and p4a hook
 ```ini
 android.add_resources = res
 android.add_src = src
 p4a.hook = p4a/hook.py
 ```
 
-For More widget customisation check: [How to Customise.md](how-to-customise.md)
----
 
 Sample Image:
 
 ![Rounded corners widget](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/not-rounded.jpg)
+
+
+### For More widget customisation check: [How to Customise.md](how-to-customise.md)
+
