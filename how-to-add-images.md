@@ -183,6 +183,6 @@ Sample Image
 
 ![widget with img in it](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/adding-img-in-widget.jpg)
 
-- Blank box is from adding widgetimage before file exists
+- Blank box is from adding image when it doesn't exist
 
 ### For Questions: [open_issue](https://github.com/Fector101/kivy-androidwidgets/issues/new)
