@@ -132,6 +132,7 @@ public class ImageTestWidget extends AppWidgetProvider {
 ```
 
 Step 4: Automate Injecting Reciecver to `AndroidManifest.xml`
+
 Change these:
 - `package` variable to match `package.domain` and `package.name` from `buildozer.spec`
 - `image_test_widget_info` to match file name from **step 2**
@@ -182,6 +183,6 @@ Sample Image
 
 ![widget with img in it](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/adding-img-in-widget.jpg)
 
-- Blank box is from adding widget before file existed
+- Blank box is from adding widgetimage before file exists
 
 ### For Questions: [open_issue](https://github.com/Fector101/kivy-androidwidgets/issues/new)
