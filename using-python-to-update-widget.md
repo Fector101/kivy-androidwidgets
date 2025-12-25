@@ -1,6 +1,9 @@
-# This is a working sample, Don't have time to write explanation for now, will surely do later. Dropping it now cause i think it's very useful
+## This is a working sample, Don't have time to write explanation for now, will surely do later. Dropping it now cause i think it's very useful
 
+### Worked in my service file and it should work for UI thread too.
 ```python
+from android_notify.config import get_python_service, get_python_activity_context
+
     def worked_changed_widget_from_service(self):
         # This worked for Changing widget text
         AppWidgetManager = autoclass('android.appwidget.AppWidgetManager')
