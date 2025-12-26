@@ -27,7 +27,7 @@ from android_notify.config import get_python_service, get_python_activity_contex
         title_id = resources.getIdentifier("widget_text", "id", package_name)
 
         views = RemoteViews(package_name, text_layout)
-        views.setTextViewText(title_id, AndroidString("Madness"))
+        views.setTextViewText(title_id, AndroidString("Frm Python"))
         appWidgetManager.updateAppWidget(ids, views)
         print('got------- here')
 
