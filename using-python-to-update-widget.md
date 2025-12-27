@@ -135,7 +135,7 @@ Things needed
 - `Text id`, In our case `widget_text`
 
 ```python
-from jnius import cast, autoclass
+from jnius import autoclass
 
 AppWidgetManager = autoclass('android.appwidget.AppWidgetManager')
 ComponentName = autoclass('android.content.ComponentName')
@@ -148,14 +148,17 @@ package_name = context.getPackageName()
 
 component = ComponentName( context, f'{package_name}.SimpleWidget' )
 appWidgetManager = AppWidgetManager.getInstance(context)
-ids = appWidgetManager.getAppWidgetIds(component)
+ids = appWidgetManager.getAppWidgetIds(component) # In tests would be empty if Java file doesn't exist
 
-text_layout_id = resources.getIdentifier("simple_widget", "layout", package_name)
+text_layout_id = resources.getIdentifier("simple_widget", "layout", package_name) # In tests would return "0" if layout doesn't exist
 views = RemoteViews(package_name, text_layout_id)
 
-title_id = resources.getIdentifier("widget_text", "id", package_name)
+title_id = resources.getIdentifier("widget_text", "id", package_name) # In tests would return "0" if id doesn't exist
 views.setTextViewText(title_id, AndroidString("Hello Frm Python"))
 appWidgetManager.updateAppWidget(ids, views)
 
 
 ```
+
+
+### For Questions: [open_issue](https://github.com/Fector101/kivy-androidwidgets/issues/new)
