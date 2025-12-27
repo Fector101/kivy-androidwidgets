@@ -100,3 +100,9 @@ Complete file:
 | **Sample of Widget with Rounded Corners** | **Sample of Widget with No Rounded Corners** |
 |------------------------------------------|----------------------------------------------|
 | ![Rounded corners widget](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/rounded1.jpg) | ![No rounded corners widget](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/not-rounded.jpg) |
+
+
+
+
+
+### For Adding Images in widgets: [How to Add Images.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/how-to-add-images.md)
