@@ -80,7 +80,7 @@ path: `res/xml/widgetproviderinfo.xml`
     android:minHeight="60dp"
     android:updatePeriodMillis="1800000"
     android:initialLayout="@layout/simple_widget"
-    android:previewImage="@drawable/ic_launcher_foreground"
+
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen">
 </appwidget-provider>
