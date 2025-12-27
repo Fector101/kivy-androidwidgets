@@ -71,8 +71,21 @@ public class SimpleWidget extends AppWidgetProvider {
     }
 }
 ```
-
-### Inject App widget provider Info in `AndroidMainfest.xml`
+### Create an xml containing the info about the widget.  
+Like: size, preview icon and others   
+path: `res/xml/widgetproviderinfo.xml`
+```xml
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="120dp"
+    android:minHeight="60dp"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/simple_widget"
+    android:previewImage="@drawable/ic_launcher_foreground"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen">
+</appwidget-provider>
+```
+### Automate injecting Receiver in XML
 
 > [!IMPORTANT]  
 > This is where we link `App Widget Provider` to `Actual Widget xml`  
