@@ -47,8 +47,8 @@ Create preview image png in right path`res/drawable/ic_launcher_foreground.png`
 
 ### step 3: Create a `AppWidgetProvider` it's used to receive events for widget.   
 path: `src/SimpleWidget.java`.  
-This will receive an event when widget is add to change it's text
-
+- This will receive an event when widget is add to change it's text
+- You Can use [python to make changes](https://github.com/Fector101/kivy-androidwidgets/blob/main/using-python-to-update-widget.md#changing-text-with-python), but i don't to make it recive events like swipes and taps to widget
 ```java
 package org.wally.waller; // Change here from buildozer.spec package.domain+package.name
 
