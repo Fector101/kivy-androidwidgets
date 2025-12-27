@@ -1,117 +1,147 @@
-## This is a working sample, Don't have time to write explanation for now, will surely do later. Dropping it now cause i think it's very useful
+## Using Python to Make Changes in Home Screen widget
 
-### Worked in my service file and it should work for UI thread too.
+
+Prerequisite
+- You should have gone through [README.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/README.md) <-- Important
+
+### Required Things
+- A `App Widget Provider` java file, even if it's empty, [How to add](https://github.com/Fector101/kivy-androidwidgets/blob/main/README.md#step-3-create-a-appwidgetprovider-its-used-to-receive-events-for-widget)
+
+## Example - Changing Text
+
+### Actual Widget
+
+- Important to mark `widget_text` which is the Text id, would be used to select later
+
+Stored in: `res/layout/simple_widget.xml`
+This a simple widget with a text
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/widget_text"
+        android:text="Loading..."
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+```
+
+
+### An App Widget Provider
+
+path: `src/SimpleWidget.java`.  
+
+- Can be Empty Since we using python to make Changes
+- Useful For receiving event like Taps and Swipes
+
+```java
+package org.wally.waller; // Change here from buildozer.spec package.domain+package.name
+
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
+import android.content.Context;
+import android.widget.RemoteViews;
+
+import org.wally.waller.R; // Change here from buildozer.spec package.domain+package.name
+import android.app.PendingIntent;
+import android.content.Intent;
+
+public class SimpleWidget extends AppWidgetProvider {
+
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) {
+
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.simple_widget);
+
+            // Set text
+            views.setTextViewText(R.id.widget_text, "Hello frm Java!");
+
+            // Update widget
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+    }
+}
+```
+
+### Inject App widget provider Info in `AndroidMainfest.xml`
+
+> [!IMPORTANT]  
+> This is where we link `App Widget Provider` to `Actual Widget xml`  
+> And Provide Info about widget too.
+
+```py
+from pathlib import Path
+from pythonforandroid.toolchain import ToolchainCL
+
+
+def after_apk_build(toolchain: ToolchainCL):
+    manifest_file = Path(toolchain._dist.dist_dir) / "src" / "main" / "AndroidManifest.xml"
+    text = manifest_file.read_text(encoding="utf-8")
+
+    package = "org.wally.waller" # Change here to yours
+    receiver_xml = f'''
+    <receiver android:name="{package}.SimpleWidget"
+              android:enabled="true"
+              android:exported="false">
+        <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        </intent-filter>
+        <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/widgetproviderinfo" />
+    </receiver>
+    '''
+
+    if receiver_xml.strip() not in text:
+        if "</application>" in text:
+            text = text.replace("</application>", f"{receiver_xml}\n</application>")
+            print("Receiver added")
+        else: 
+            print("Could not find </application> to insert receiver")
+    else: 
+        print("Receiver already exists in manifest")
+
+    manifest_file.write_text(text, encoding="utf-8")
+    print("Successfully_101: Manifest update completed successfully!")
+
+```
+
+### Changing Text with Python
+
+Things needed
+- `App Widget Provider` Class Name, In our case `SimpleWidget`
+- `Widget File name`, In our case `simple_widget`
+- `Text id`, In our case `widget_text`
+
 ```python
-from android_notify.config import get_python_service, get_python_activity_context
+from jnius import cast, autoclass
 
-    def worked_changed_widget_from_service(self):
-        # This worked for Changing widget text
-        AppWidgetManager = autoclass('android.appwidget.AppWidgetManager')
-        ComponentName = autoclass('android.content.ComponentName')
-        RemoteViews = autoclass('android.widget.RemoteViews')
+AppWidgetManager = autoclass('android.appwidget.AppWidgetManager')
+ComponentName = autoclass('android.content.ComponentName')
+RemoteViews = autoclass('android.widget.RemoteViews')
 
-        context = get_python_activity_context()  # PythonActivity.mActivity.getApplicationContext()
-        resources = context.getResources()
-        package_name = context.getPackageName()
+context =  PythonActivity.mActivity.getApplicationContext()
+resources = context.getResources()
+package_name = context.getPackageName()
 
-        # IMPORTANT: use CLASS NAME STRING, NOT autoclass
-        component = ComponentName(
-            context,
-            'org.wally.waller.Image1'
-        )
+component = ComponentName( context, f'{package_name}.SimpleWidget' )
+appWidgetManager = AppWidgetManager.getInstance(context)
+ids = appWidgetManager.getAppWidgetIds(component)
 
-        appWidgetManager = AppWidgetManager.getInstance(context)
-        ids = appWidgetManager.getAppWidgetIds(component)
+text_layout_id = resources.getIdentifier("simple_widget", "layout", package_name)
+views = RemoteViews(package_name, text_layout_id)
 
-        text_layout = resources.getIdentifier("image_test_widget", "layout", package_name)
-        title_id = resources.getIdentifier("widget_text", "id", package_name)
+title_id = resources.getIdentifier("widget_text", "id", package_name)
+views.setTextViewText(title_id, AndroidString("Hello Frm Python"))
+appWidgetManager.updateAppWidget(ids, views)
 
-        views = RemoteViews(package_name, text_layout)
-        views.setTextViewText(title_id, AndroidString("Frm Python"))
-        appWidgetManager.updateAppWidget(ids, views)
-        print('got------- here')
-
-    def update_widget_image(self, wallpaper_path):
-        Bitmap = autoclass('android.graphics.Bitmap')
-        BitmapConfig = autoclass('android.graphics.Bitmap$Config')
-        Canvas = autoclass('android.graphics.Canvas')
-        Paint = autoclass('android.graphics.Paint')
-        Rect = autoclass('android.graphics.Rect')
-        RectF = autoclass('android.graphics.RectF')
-        PorterDuffMode = autoclass('android.graphics.PorterDuff$Mode')
-        PorterDuffXfermode = autoclass('android.graphics.PorterDuffXfermode')
-
-        BitmapFactory = autoclass('android.graphics.BitmapFactory')
-        BitmapFactoryOptions = autoclass('android.graphics.BitmapFactory$Options')
-
-        AppWidgetManager = autoclass('android.appwidget.AppWidgetManager')
-        ComponentName = autoclass('android.content.ComponentName')
-        RemoteViews = autoclass('android.widget.RemoteViews')
-
-        context = get_python_activity_context()
-        resources = context.getResources()
-        package_name = context.getPackageName()
-
-        image_file = os.path.join(
-            context.getFilesDir().getAbsolutePath(),
-            "app",
-            wallpaper_path
-        )
-
-        if not os.path.exists(image_file):
-            self.__log(f"Image not found: {image_file}", "ERROR")
-            return
-
-        opts = BitmapFactoryOptions()
-        opts.inSampleSize = 4  # widget-safe memory usage
-        src = BitmapFactory.decodeFile(image_file, opts)
-
-        if src is None:
-            self.__log("Bitmap decode failed", "ERROR")
-            return
-
-        # Crop bitmap to square
-        size = min(src.getWidth(), src.getHeight())
-        x = (src.getWidth() - size) // 2
-        y = (src.getHeight() - size) // 2
-        square = Bitmap.createBitmap(src, x, y, size, size)
-
-        # Scale bitmap to widget size
-        widget_dp = 120  # widget layout width/height in dp
-        density = context.getResources().getDisplayMetrics().density
-        widget_px = int(widget_dp * density)  # convert dp to pixels
-
-        scaled_bitmap = Bitmap.createScaledBitmap(square, widget_px, widget_px, True)
-
-        # Create rounded bitmap using Canvas
-        output = Bitmap.createBitmap(widget_px, widget_px, BitmapConfig.ARGB_8888)
-        canvas = Canvas(output)
-
-        paint = Paint()
-        paint.setAntiAlias(True)
-
-        rect = Rect(0, 0, widget_px, widget_px)
-        rectF = RectF(rect)
-
-        corner_radius_px = 16 * density  # 16dp corners
-        canvas.drawARGB(0, 0, 0, 0)
-        canvas.drawRoundRect(rectF, corner_radius_px, corner_radius_px, paint)
-
-        paint.setXfermode(PorterDuffXfermode(PorterDuffMode.SRC_IN))
-        canvas.drawBitmap(scaled_bitmap, rect, rect, paint)
-
-        # Update widget
-        layout_id = resources.getIdentifier("image_test_widget", "layout", package_name)
-        image_id = resources.getIdentifier("test_image", "id", package_name)
-
-        views = RemoteViews(package_name, layout_id)
-        views.setImageViewBitmap(image_id, output)
-
-        component = ComponentName(context, f"{package_name}.Image1")
-        appWidgetManager = AppWidgetManager.getInstance(context)
-        ids = appWidgetManager.getAppWidgetIds(component)
-        appWidgetManager.updateAppWidget(ids, views)
-
-        self.__log(f"Changed Home Screen Widget: {wallpaper_path}", "SUCCESS")
 
 ```
