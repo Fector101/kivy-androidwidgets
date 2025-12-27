@@ -140,7 +140,7 @@ from jnius import cast, autoclass
 AppWidgetManager = autoclass('android.appwidget.AppWidgetManager')
 ComponentName = autoclass('android.content.ComponentName')
 RemoteViews = autoclass('android.widget.RemoteViews')
-String = autoclass("java.lang.String")
+AndroidString = autoclass("java.lang.String")
 
 context =  PythonActivity.mActivity.getApplicationContext()
 resources = context.getResources()
