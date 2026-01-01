@@ -1,6 +1,4 @@
 import os
-from jnius import autoclass
-
 
 ON_ANDROID = False
 def is_platform_android():
@@ -19,6 +17,7 @@ def is_platform_android():
 
 
 if is_platform_android():
+    from jnius import autoclass # This for when genrating xml with P4A.hook
     ON_ANDROID = True
 
 def from_service_file():

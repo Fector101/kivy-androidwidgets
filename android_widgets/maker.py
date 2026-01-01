@@ -74,8 +74,6 @@ def generate_receivers(package: str) -> str:
 
 
 
-print("------------------ Hello from android_widget.service_injector ------------------")
-
 
 def inject_foreground_service_types(
     manifest_text: str,

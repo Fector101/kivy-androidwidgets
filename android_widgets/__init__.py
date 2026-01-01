@@ -1,6 +1,6 @@
 
 import os
-import traceback
+# import traceback
 
 from .config import is_platform_android
 from .aw_logging import logger, enable_logging
@@ -35,7 +35,7 @@ def get_package_name():
 def get_resource(name, folder_base):
     resources = get_resources()
     package_name = get_package_name()
-    print("resources.getIdentifier",name, folder_base,"id:",resources.getIdentifier(name, folder_base, package_name))
+    # print("resources.getIdentifier",name, folder_base,"id:",resources.getIdentifier(name, folder_base, package_name))
     return resources.getIdentifier(name, folder_base, package_name)
 
 def get_buildozer_spec_file_path():
@@ -139,6 +139,9 @@ class AppWidgetManager:
             logger.info(f"Found Layout: {java_file_path}")
             return None
 
+
+
+# Tests
 # try:
 #     print("-"*5,'test 1','-'*5)
 #     appWidgetManager = AppWidgetManager("Image")
