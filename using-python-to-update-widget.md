@@ -5,8 +5,11 @@ Prerequisite
 - You should have gone through [README.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/README.md) <-- Important
 
 ### Required Things
-- A `App Widget Provider` java file, even if it's empty, [How to add](https://github.com/Fector101/kivy-androidwidgets/blob/main/README.md#step-3-create-a-appwidgetprovider-its-used-to-receive-events-for-widget)
+- A `App Widget Provider` java file, With defined Class even if it's empty, [How to add](https://github.com/Fector101/kivy-androidwidgets/blob/main/README.md#step-3-create-a-appwidgetprovider-its-used-to-receive-events-for-widget)
 
+<details>
+    <summary><b>Prerequisite Steps in README.md</b></summary>
+    
 ## Example - Changing Text
 
 ### Actual Widget
@@ -126,6 +129,8 @@ def after_apk_build(toolchain: ToolchainCL):
     print("Successfully_101: Manifest update completed successfully!")
 
 ```
+</details>
+
 
 ### Changing Text with Python
 
@@ -145,16 +150,20 @@ AndroidString = autoclass("java.lang.String")
 context =  PythonActivity.mActivity.getApplicationContext()
 resources = context.getResources()
 package_name = context.getPackageName()
+class_name = "SimpleWidget"
+widget_file_name = "simple_widget"
+text_id = "widget_text"
+new_txt = "Hello Frm Python"
 
-component = ComponentName( context, f'{package_name}.SimpleWidget' )
+component = ComponentName( context, f'{package_name}.{class_name}' )
 appWidgetManager = AppWidgetManager.getInstance(context)
 ids = appWidgetManager.getAppWidgetIds(component) # In tests would be empty if Java file doesn't exist
 
-text_layout_id = resources.getIdentifier("simple_widget", "layout", package_name) # In tests would return "0" if layout doesn't exist
+text_layout_id = resources.getIdentifier(widget_file_name, "layout", package_name) # In tests would return "0" if layout doesn't exist
 views = RemoteViews(package_name, text_layout_id)
 
-title_id = resources.getIdentifier("widget_text", "id", package_name) # In tests would return "0" if id doesn't exist
-views.setTextViewText(title_id, AndroidString("Hello Frm Python"))
+title_id = resources.getIdentifier(text_id, "id", package_name) # In tests would return "0" if id doesn't exist
+views.setTextViewText(title_id, AndroidString(new_txt))
 appWidgetManager.updateAppWidget(ids, views)
 
 
