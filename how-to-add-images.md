@@ -186,3 +186,4 @@ Sample Image
 - Blank box is from adding image when it doesn't exist
 
 ### For Questions: [open_issue](https://github.com/Fector101/kivy-androidwidgets/issues/new)
+### How to update widgets with python: [using-python-to-update-widget.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/using-python-to-update-widget.md)
