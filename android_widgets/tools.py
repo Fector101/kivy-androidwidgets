@@ -41,3 +41,9 @@ class SpecFile:
 
     def section(self, section: str) -> dict:
         return self.data.get(section, {}).copy()
+
+if __name__ == "__main__":
+    specFile = SpecFile("/home/fabian/Documents/Laner/mobile/buildozer.spec")
+    package_name = specFile.get("app","package.name")
+    package_domain = specFile.get("app","package.domain")
+    print("-"*20,f"{package_name}.{package_domain}","-"*20)

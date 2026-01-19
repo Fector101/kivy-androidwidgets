@@ -3,4 +3,3 @@ dist/
 .venv/
 .idea/
 __pycache__/
-android_widgets/

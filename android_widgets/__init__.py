@@ -6,7 +6,6 @@ from .config import is_platform_android
 from .aw_logging import logger, enable_logging
 
 
-__all__ = ["logger"]
 
 from .config import get_python_activity_context
 

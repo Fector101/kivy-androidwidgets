@@ -1,7 +1,6 @@
-print("----------------------Running android_widget.maker-----------------")
-
 from dataclasses import dataclass
 from typing import List, Optional
+from android_widgets.tools import SpecFile
 
 
 @dataclass
@@ -14,7 +13,13 @@ class Receiver:
     meta_name: Optional[str] = "android.appwidget.provider"
     meta_resource: Optional[str] = None
 
-    def to_xml(self, package: str) -> str:
+    def to_xml(self, package: str = None, spec_file_path: str = None) -> str:
+        if not package and spec_file_path:
+            specFile = SpecFile(spec_file_path)
+            package_name = specFile.get("app", "package.name")
+            package_domain = specFile.get("app", "package.domain")
+            package = f"{package_domain}.{package_name}"
+
         attrs = [
             f'android:name="{package}.{self.name}"',
             f'android:enabled="{str(self.enabled).lower()}"',
@@ -24,8 +29,7 @@ class Receiver:
         if self.label:
             attrs.append(f'android:label="{self.label}"')
 
-        xml = [f"<receiver {' '.join(attrs)}>"]
-        xml.append("    <intent-filter>")
+        xml = [f"<receiver {' '.join(attrs)}>", "    <intent-filter>"]
 
         for action in self.actions:
             xml.append(f'        <action android:name="{action}" />')
@@ -42,7 +46,7 @@ class Receiver:
         return "\n".join(xml)
 
 
-def generate_receivers(package: str) -> str:
+def test_generate_receivers(package: str = None) -> str:
     receivers = [
         Receiver(
             name="Action1",
@@ -73,15 +77,15 @@ def generate_receivers(package: str) -> str:
     return "\n\n".join(r.to_xml(package) for r in receivers)
 
 
-
-
 def inject_foreground_service_types(
-    manifest_text: str,
-    package: str,
-    services: dict[str, str],
+        manifest_text: str,
+        services: dict[str, str],
+        package: str = None,
+        spec_file_path: str = None
 ) -> str:
     """
     Inject android:foregroundServiceType into <service /> tags.
+    :param spec_file_path:
     :param manifest_text: AndroidManifest.xml file Text Content
     :param package: package.domain + "." + package.name
     :param services:
@@ -91,6 +95,11 @@ def inject_foreground_service_types(
             "location": "location"
         }
     """
+    if not package and spec_file_path:
+        specFile = SpecFile(spec_file_path)
+        package_name = specFile.get("app", "package.name")
+        package_domain = specFile.get("app", "package.domain")
+        package = f"{package_domain}.{package_name}"
 
     for name, fgs_type in services.items():
         service_name = f"{package}.Service{name.capitalize()}"
@@ -125,3 +134,7 @@ def inject_foreground_service_types(
         )
 
     return manifest_text
+
+
+if __name__ == "__main__":
+    print(test_generate_receivers())
