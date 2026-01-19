@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "android-widgets"
-version = "0.1.4"
+version = "0.1.5"
 description = "This would be used to auto gen XMLs for Android Home Screen widgets."
 readme = { file = "README.md", content-type = "text/markdown" }
 authors = [
