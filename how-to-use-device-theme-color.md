@@ -4,7 +4,7 @@ On Android 12+ the accent color of the device changes with the current wallpaper
 android.gradle_dependencies = com.google.android.material:material:1.11.0
 ```
 
-- Path: `res/layout/carousel_widget.xml`
+- Path: `res/layout/simple_widget.xml`
 - `?attr/colorPrimary` contains the bright theme color
 - Optional atttribute for background `android:background="@drawable/widget_bg"`
 ```xml
