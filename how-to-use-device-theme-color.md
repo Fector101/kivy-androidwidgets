@@ -1,7 +1,8 @@
-On Android 12+ the accent color of the device changes with the current wallpaper these are the steps to go about using it
+On Android 12+ the accent color of the device changes with the current wallpaper.  
+These are the steps to go about using it
 - Path: `buildozer.spec`
 ```ini
-android.gradle_dependencies = com.google.android.material:material:1.11.0
+android.gradle_dependencies = com.google.android.material:material:1.12.0
 ```
 
 - Path: `res/layout/simple_widget.xml`
@@ -56,4 +57,10 @@ Optional background
 </shape>
 
 ```
+
+| **Sample of Widget In Light Mode** | **Sample of Widget with In Dark Mode** |
+|------------------------------------------|----------------------------------------------|
+| ![In Light Mode](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/themed-layout-light.png) | ![In Dark Mode](https://raw.githubusercontent.com/Fector101/kivy-androidwidgets/main/imgs/themed-layout-dark.png) |
+
+
 Source: https://developer.android.com/develop/ui/views/appwidgets/enhance
