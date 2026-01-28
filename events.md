@@ -26,6 +26,7 @@ Path: `res/layout/simple_widget.xml`
 ```
 
 ### In the `AppWidgetProvider`
+path: `src/SimpleWidget.java`
 - Change first line `org.wally.waller` to data in your buildozer.spec `package.domain+'.'+package.name`
 - Apply Same Change to `org.wally.waller.R` and leave `.R` as is.
 ```java
@@ -42,9 +43,9 @@ import android.widget.RemoteViews;
 
 import org.wally.waller.R;
 
-public class CarouselWidgetProvider extends AppWidgetProvider {
+public class SimpleWidget extends AppWidgetProvider {
 
-    private static final String TAG = "CarouselWidgetProvider";
+    private static final String TAG = "SimpleWidget";
 
     @Override
     public void onUpdate(
@@ -95,9 +96,7 @@ public class CarouselWidgetProvider extends AppWidgetProvider {
                 views.setOnClickPendingIntent(R.id.widget_text, pendingIntent);
                 Log.d(TAG, "PendingIntent attached to R.id.widget_text and widget");
             }
-
-
-                appWidgetManager.updateAppWidget(appWidgetId, views);
+            appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 }
 ```
