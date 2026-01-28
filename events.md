@@ -1,25 +1,33 @@
 ## Tap widget to open App
 
+### In the Layout xml used to display widget
+ID's must be added for later use
+- `android:id="@+id/widget_root"` to select layout container
+- `android:id="@+id/widget_text"` to select text
 
+Path: `res/layout/simple_widget.xml`
 ```xml
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
-    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#FFFFFF"
     android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/test_image"
+    <TextView
+        android:id="@+id/widget_text"
+        android:text="Loading..."
+        android:textSize="18sp"
+        android:textColor="#000"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"/>
-
-
+        android:layout_height="wrap_content"/>
 </LinearLayout>
 ```
+
+### In the `AppWidgetProvider`
+- Change first line `org.wally.waller` to data in your buildozer.spec `package.domain+'.'+package.name`
+- Apply Same Change to `org.wally.waller.R` and leave `.R` as is.
 ```java
 package org.wally.waller;
 
@@ -84,8 +92,8 @@ public class CarouselWidgetProvider extends AppWidgetProvider {
                 Log.d(TAG, "PendingIntent created");
 
                 views.setOnClickPendingIntent(R.id.widget_root, pendingIntent);
-                views.setOnClickPendingIntent(R.id.test_image, pendingIntent);
-                Log.d(TAG, "PendingIntent attached to R.id.test_image and widget");
+                views.setOnClickPendingIntent(R.id.widget_text, pendingIntent);
+                Log.d(TAG, "PendingIntent attached to R.id.widget_text and widget");
             }
 
 
