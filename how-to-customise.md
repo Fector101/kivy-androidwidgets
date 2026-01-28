@@ -105,4 +105,6 @@ Complete file:
 
 
 
-### For Adding Images in widgets: [How to Add Images.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/how-to-add-images.md)
+### Useful
+- For Adding Images in widgets: [How to Add Images.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/how-to-add-images.md)
+- Use device theme color: [how-to-use-device-theme-color.md](https://github.com/Fector101/kivy-androidwidgets/blob/main/how-to-use-device-theme-color.md)
